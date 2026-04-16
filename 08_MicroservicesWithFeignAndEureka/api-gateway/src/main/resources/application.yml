@@ -1,0 +1,22 @@
+server:
+  port: 8765 # Porta onde o API Gateway está rodando
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+      # Service Discovery: permite que o Gateway descubra dinamicamente
+      # onde estão os microserviços (sem precisar de URL fixa)
+
+spring:
+  application:
+    name: api-gateway # Nome registrado no Eureka
+#  cloud:
+#    gateway:
+#      server:
+#        webflux:
+#          discovery:
+#            locator:
+#              enabled: true
+#              lower-case-service-id: true
+
