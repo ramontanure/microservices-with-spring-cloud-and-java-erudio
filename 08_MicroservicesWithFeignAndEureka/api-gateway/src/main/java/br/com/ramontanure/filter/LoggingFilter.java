@@ -18,7 +18,7 @@ public class LoggingFilter implements GlobalFilter {
 
         // 🔍 Loga o caminho da requisição que chegou no Gateway
         // Útil para debug e rastreamento das chamadas entre serviços
-        logger.info("Request path -> {}", exchange.getRequest().getPath());
+        //logger.info("Request path -> {}", exchange.getRequest().getPath());
 
         // 🔁 Continua o fluxo para o serviço de destino
         return chain.filter(exchange);

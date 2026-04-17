@@ -5,6 +5,8 @@ import br.com.ramontanure.environment.InstanceInformationService;
 import br.com.ramontanure.model.Book;
 import br.com.ramontanure.proxy.ExchangeProxy;
 import br.com.ramontanure.repository.BookRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Date;
 import java.util.HashMap;
 
+@Tag(name = "Book Endpoint")
 @RestController
 @RequestMapping("book-service")
 public class BookController {
@@ -29,6 +32,7 @@ public class BookController {
     @Autowired
     private ExchangeProxy proxy; // 🔗 Feign: chama outro microserviço
 
+    @Operation(summary = "Find a specific book by your ID")
     @GetMapping(value = "/{id}/{currency}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Book findBook(@PathVariable("id") Long id, @PathVariable("currency") String currency) {
 
