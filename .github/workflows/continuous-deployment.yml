@@ -32,15 +32,15 @@ jobs:
       #      run: mvn spring-boot:build-image
 
       - name: Build Exchange Microservice Docker Image
-        working-directory: ./19_MicroservicesRunningInKubernetesCluster/exchange-service
+        working-directory: ./09_MicroservicesRunningInKubernetesCluster/exchange-service
         run: mvn clean package
 
       - name: Build Book Microservice Docker Image
-        working-directory: ./19_MicroservicesRunningInKubernetesCluster/book-service
+        working-directory: ./09_MicroservicesRunningInKubernetesCluster/book-service
         run: mvn clean package
 
       - name: Docker Compose Build
-        working-directory: ./19_MicroservicesRunningInKubernetesCluster
+        working-directory: ./09_MicroservicesRunningInKubernetesCluster
         run: docker compose build
 
       - name: Tag Docker Images
