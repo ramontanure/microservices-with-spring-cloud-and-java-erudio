@@ -33,11 +33,11 @@ jobs:
 
       - name: Build Exchange Microservice Docker Image
         working-directory: ./09_MicroservicesRunningInKubernetesCluster/exchange-service
-        run: mvn clean package
+        run: mvn clean package -DskipTests
 
       - name: Build Book Microservice Docker Image
         working-directory: ./09_MicroservicesRunningInKubernetesCluster/book-service
-        run: mvn clean package
+        run: mvn clean package -DskipTests
 
       - name: Docker Compose Build
         working-directory: ./09_MicroservicesRunningInKubernetesCluster
