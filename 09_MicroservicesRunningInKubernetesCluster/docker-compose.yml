@@ -1,6 +1,6 @@
 services:
   exchange-service:
-    image: leandrocgsi/exchange-service
+    image: ramontanure/exchange-service
     restart: always
     build:
       context: ./exchange-service
@@ -18,7 +18,7 @@ services:
       - ramontanure-network
 
   book-service:
-    image: leandrocgsi/book-service
+    image: ramontanure/book-service
     restart: always
     build:
       context: ./book-service
