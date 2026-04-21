@@ -1,0 +1,74 @@
+server:
+  port: 8100 # 📚 Porta onde o book-service roda
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka}
+#      # 📡 Permite registrar no Eureka e descobrir outros serviços
+
+resilience4j:
+  ratelimiter:
+    instances:
+      default:
+        limit-for-period: 2
+        limit-refresh-period: 10s
+        # 🚦 RateLimiter: limita quantidade de requisições por período
+
+  retry:
+    instances:
+      foo-bar:
+        max-attempts: 7
+        wait-duration: 1s
+        enable-exponential-backoff: true
+        # 🔁 Retry: tenta novamente em caso de falha
+
+  bulkhead:
+    instances:
+      default:
+        max-concurrent-calls: 10
+      foo-bar:
+        max-concurrent-calls: 20
+        # 🧱 Bulkhead: limita chamadas simultâneas (evita sobrecarga)
+
+spring:
+  application:
+    name: book-service # 🏷️ Nome no Eureka
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/book-service
+    username: root
+    password: admin123
+    # 🗄️ Configuração do banco MySQL
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    open-in-view: false
+  management:
+    tracing:
+      sampling:
+        probability: 1.0
+#  zipkin:
+#    base-url: ${SPRING_ZIPKIN_BASEURL:http://localhost:9411}
+
+
+springdoc:
+  api-docs:
+    path: /book-service/v3/api-docs
+  swagger-ui:
+    url: /book-service/v3/api-docs
+  override-server-url: true

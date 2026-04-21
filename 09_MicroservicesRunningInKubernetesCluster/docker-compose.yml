@@ -1,0 +1,41 @@
+services:
+
+  exchange-service:
+    image: ramontanure/exchange-service
+    restart: always
+    build:
+      context: ./exchange-service
+      dockerfile: Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/exchange_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2
+      SPRING_DATASOURCE_USERNAME: docker
+      SPRING_DATASOURCE_PASSWORD: admin123
+    ports:
+      - 8000:8000
+    networks:
+      - ramontanure-network
+
+  book-service:
+    image: ramontanure/book-service
+    restart: always
+    build:
+      context: ./book-service
+      dockerfile: Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/book_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2
+      SPRING_DATASOURCE_USERNAME: docker
+      SPRING_DATASOURCE_PASSWORD: admin123
+    ports:
+      - 8100:8100
+    networks:
+      - ramontanure-network
+networks:
+  ramontanure-network:
+    name: ramontanure-network
+    driver: bridge
