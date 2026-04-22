@@ -58,7 +58,7 @@ public class BookController {
         // 📊 Informação de debug (mostra qual instância respondeu)
         book.setEnvironment(
                 "BOOK HOST " + host + " PORT: " + port +
-                        " VERSION: kube-v1" +
+                        " VERSION: kube-v2" +
                         " EXCHANGE HOST: " + exchange.getEnvironment()
         );
 
